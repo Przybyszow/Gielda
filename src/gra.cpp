@@ -29,7 +29,7 @@ int Gra::dodajGracza(const char* nazwa_gracza)
 		return 1;
 	}
 	
-	_gracze.push_back( new Gracz(nazwa_gracza) );
+	_gracze.push_back( Gracz(nazwa_gracza) );
 	
 	return 0;
 }
@@ -40,9 +40,8 @@ void Gra::usunGracza(const char* nazwa_gracza)
 	// Szuka graczy o nazwie równej łańcuchowi nazwa_gracza
 	for( int i = 0; i < _gracze.size(); ++i )
 	{
-		if( !strcmp((_gracze[i]->wezNazweGracza().c_str()), nazwa_gracza) )
+		if( !strcmp((_gracze[i].wezNazweGracza().c_str()), nazwa_gracza) )
 		{
-			delete _gracze[i];
 			_gracze.erase(_gracze.begin()+i);
 		}
 	}
@@ -53,6 +52,6 @@ void Gra::info()
 	printf("Gracze:\n");
 	for( int i = 0; i < _gracze.size(); ++i )
 	{
-		printf("%d. %s\n", i+1, _gracze[i]->wezNazweGracza().c_str());
+		printf("%d. %s\n", i+1, _gracze[i].wezNazweGracza().c_str());
 	}
 }

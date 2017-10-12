@@ -8,7 +8,7 @@
 class Gra
 {
 	// lista aktualnie połączonych graczy
-	std::vector<Gracz*> _gracze;
+	std::vector<Gracz> _gracze;
 
 public:
 	// startuje nową grę z aktualnie połączonymi graczami
