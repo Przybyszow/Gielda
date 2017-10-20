@@ -1,4 +1,8 @@
+#include <iostream>
+
 #include "app.h"
+
+#include "zapis_wczyt.h"
 
 int main(int argc, const char* argv[])
 {
@@ -14,6 +18,11 @@ int main(int argc, const char* argv[])
 	gra->info();
 	
 	gra->start();
+	
+	gra->wczytaj("dane/zapis.txt");
+	//gra->zapisz("dane/zapis.txt");
+	
+	
 	
 	App::czyszczenie();
 	return 0;
