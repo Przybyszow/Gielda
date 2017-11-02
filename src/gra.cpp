@@ -1,8 +1,8 @@
 #include "gra.h"
 
-#include "zapis_wczyt.h"
-
 #include <iostream>
+#include <iomanip>
+#include <fstream>
 #include <string.h>
 #include <string>
 
@@ -16,11 +16,46 @@ Gra::~Gra()
 void Gra::start()
 {
 	_tura = 0;
+	
+	dodajSpolke(Spolka::Typ::PRZEMYSL_BUDOWLANY, "Dom Development", 50);
+	dodajSpolke(Spolka::Typ::PRZEMYSL_BUDOWLANY, "Budimex", 195);
+	dodajSpolke(Spolka::Typ::PRZEMYSL_BUDOWLANY, "Mostostal", 14);
+	dodajSpolke(Spolka::Typ::PRZEMYSL_BUDOWLANY, "Energomontaż", 14);
+	dodajSpolke(Spolka::Typ::PRZEMYSL_BUDOWLANY, "J.W. Construction", 4);
+	
+	dodajSpolke(Spolka::Typ::PRZEMYSL_SPOZYWCZY, "Soklłów", 5);
+	dodajSpolke(Spolka::Typ::PRZEMYSL_SPOZYWCZY, "Morliny", 8);
+	dodajSpolke(Spolka::Typ::PRZEMYSL_SPOZYWCZY, "Żywiec", 440);
+	dodajSpolke(Spolka::Typ::PRZEMYSL_SPOZYWCZY, "Kruszwica", 56);
+	dodajSpolke(Spolka::Typ::PRZEMYSL_SPOZYWCZY, "Carrefour", 4);
+	
+	dodajSpolke(Spolka::Typ::PRZEMYSL_ENERGETYCZNY, "Coalenergy", 2);
+	dodajSpolke(Spolka::Typ::PRZEMYSL_ENERGETYCZNY, "PGNiG", 5);
+	dodajSpolke(Spolka::Typ::PRZEMYSL_ENERGETYCZNY, "PKN Orlen", 74);
+	dodajSpolke(Spolka::Typ::PRZEMYSL_ENERGETYCZNY, "PGE", 14);
+	dodajSpolke(Spolka::Typ::PRZEMYSL_ENERGETYCZNY, "Energa", 15);
+	
+	dodajSpolke(Spolka::Typ::BANKOWOSC, "Mbank", 340);
+	dodajSpolke(Spolka::Typ::BANKOWOSC, "Alior bank", 70);
+	dodajSpolke(Spolka::Typ::BANKOWOSC, "Millenium", 5);
+	dodajSpolke(Spolka::Typ::BANKOWOSC, "ING", 120);
+	dodajSpolke(Spolka::Typ::BANKOWOSC, "PKO bp", 27);
+	
+	dodajSpolke(Spolka::Typ::UBEZPIECZENIA, "PZU", 35);
+	dodajSpolke(Spolka::Typ::UBEZPIECZENIA, "Metlive", 15);
+	dodajSpolke(Spolka::Typ::UBEZPIECZENIA, "TALANX", 100);
+	dodajSpolke(Spolka::Typ::UBEZPIECZENIA, "Warta", 215);
+	dodajSpolke(Spolka::Typ::UBEZPIECZENIA, "Aviva", 415);
+	
+	dodajWalute("Złoty", 1.00f);
+	dodajWalute("Euro", 4.20f);
+	dodajWalute("Dolar", 3.50f);
+	dodajWalute("Funt", 5.40f);
 }
 
 void Gra::zapisz(const char* sciezka)
 {
-	
+	zapiszDane(sciezka, TypZnacznika::ZAPISU_ROZGRYWKI, this);
 }
 
 void Gra::wczytaj(const char* sciezka)

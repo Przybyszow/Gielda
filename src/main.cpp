@@ -10,17 +10,9 @@ int main(int argc, const char* argv[])
 	
 	Gra* gra = &App::_gra;
 	
-	for( int i = 1; i < argc; ++i )
-	{
-		gra->dodajGracza(argv[i]);
-	}
-	
-	gra->info();
-	
 	gra->start();
 	
-	gra->wczytaj("dane/zapis.txt");
-	//gra->zapisz("dane/zapis.txt");
+	gra->zapisz("dane/zapis_v2.txt");
 	
 	
 	

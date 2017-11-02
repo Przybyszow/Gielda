@@ -1,6 +1,7 @@
 #ifndef GIELDA_GRA_H__
 #define GIELDA_GRA_H__
 
+#include "zapis_wczyt.h"
 #include "obiekty_transakcji.h"
 #include "gracz.h"
 
@@ -38,6 +39,11 @@ public:
 	
 	// funkcja testowa
 	void info();
+	
+	inline int iloscSpolek() { return _spolki.size(); }
+	inline int iloscWalut() { return _waluty.size(); }
+	
+	friend void zapiszDane(const char* sciezka, TypZnacznika typ, void* dane);
 	
 private:
 	void dodajSpolke(Spolka::Typ, const char* nazwa, unsigned int wartosc_akcji);
