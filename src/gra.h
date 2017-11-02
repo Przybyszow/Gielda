@@ -51,6 +51,8 @@ private:
 	
 	void dodajWalute(const char* nazwa, float wartosc);
 	void usunWalute(const char* nazwa);
+	
+	void usunWszystkieDane();
 };
 
 #endif // GIELDA_GRA_H__

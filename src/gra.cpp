@@ -60,7 +60,10 @@ void Gra::zapisz(const char* sciezka)
 
 void Gra::wczytaj(const char* sciezka)
 {
+	// usuwanie starych danych
+	usunWszystkieDane();
 	
+	// wczytywanie nowych danych
 }
 
 int Gra::dodajGracza(const char* nazwa_gracza)
@@ -140,4 +143,10 @@ void Gra::usunWalute(const char* nazwa)
 			_waluty.erase(_waluty.begin()+i);
 		}
 	}
+}
+
+void Gra::usunWszystkieDane()
+{
+	_spolki.clear();
+	_waluty.clear();
 }
