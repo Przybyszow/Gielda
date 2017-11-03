@@ -17,45 +17,45 @@ void Gra::start()
 {
 	_tura = 0;
 	
-	dodajSpolke(Spolka::Typ::PRZEMYSL_BUDOWLANY, "Dom Development", 50);
-	dodajSpolke(Spolka::Typ::PRZEMYSL_BUDOWLANY, "Budimex", 195);
-	dodajSpolke(Spolka::Typ::PRZEMYSL_BUDOWLANY, "Mostostal", 14);
-	dodajSpolke(Spolka::Typ::PRZEMYSL_BUDOWLANY, "Energomontaż", 14);
-	dodajSpolke(Spolka::Typ::PRZEMYSL_BUDOWLANY, "J.W. Construction", 4);
-	
-	dodajSpolke(Spolka::Typ::PRZEMYSL_SPOZYWCZY, "Soklłów", 5);
-	dodajSpolke(Spolka::Typ::PRZEMYSL_SPOZYWCZY, "Morliny", 8);
-	dodajSpolke(Spolka::Typ::PRZEMYSL_SPOZYWCZY, "Żywiec", 440);
-	dodajSpolke(Spolka::Typ::PRZEMYSL_SPOZYWCZY, "Kruszwica", 56);
-	dodajSpolke(Spolka::Typ::PRZEMYSL_SPOZYWCZY, "Carrefour", 4);
-	
-	dodajSpolke(Spolka::Typ::PRZEMYSL_ENERGETYCZNY, "Coalenergy", 2);
-	dodajSpolke(Spolka::Typ::PRZEMYSL_ENERGETYCZNY, "PGNiG", 5);
-	dodajSpolke(Spolka::Typ::PRZEMYSL_ENERGETYCZNY, "PKN Orlen", 74);
-	dodajSpolke(Spolka::Typ::PRZEMYSL_ENERGETYCZNY, "PGE", 14);
-	dodajSpolke(Spolka::Typ::PRZEMYSL_ENERGETYCZNY, "Energa", 15);
-	
-	dodajSpolke(Spolka::Typ::BANKOWOSC, "Mbank", 340);
-	dodajSpolke(Spolka::Typ::BANKOWOSC, "Alior bank", 70);
-	dodajSpolke(Spolka::Typ::BANKOWOSC, "Millenium", 5);
-	dodajSpolke(Spolka::Typ::BANKOWOSC, "ING", 120);
-	dodajSpolke(Spolka::Typ::BANKOWOSC, "PKO bp", 27);
-	
-	dodajSpolke(Spolka::Typ::UBEZPIECZENIA, "PZU", 35);
-	dodajSpolke(Spolka::Typ::UBEZPIECZENIA, "Metlive", 15);
-	dodajSpolke(Spolka::Typ::UBEZPIECZENIA, "TALANX", 100);
-	dodajSpolke(Spolka::Typ::UBEZPIECZENIA, "Warta", 215);
-	dodajSpolke(Spolka::Typ::UBEZPIECZENIA, "Aviva", 415);
-	
-	dodajWalute("Złoty", 1.00f);
-	dodajWalute("Euro", 4.20f);
-	dodajWalute("Dolar", 3.50f);
-	dodajWalute("Funt", 5.40f);
+	//dodajSpolke(Spolka::Typ::PRZEMYSL_BUDOWLANY, "Dom Development", 50);
+	//dodajSpolke(Spolka::Typ::PRZEMYSL_BUDOWLANY, "Budimex", 195);
+	//dodajSpolke(Spolka::Typ::PRZEMYSL_BUDOWLANY, "Mostostal", 14);
+	//dodajSpolke(Spolka::Typ::PRZEMYSL_BUDOWLANY, "Energomontaż", 14);
+	//dodajSpolke(Spolka::Typ::PRZEMYSL_BUDOWLANY, "J.W. Construction", 4);
+	//
+	//dodajSpolke(Spolka::Typ::PRZEMYSL_SPOZYWCZY, "Soklłów", 5);
+	//dodajSpolke(Spolka::Typ::PRZEMYSL_SPOZYWCZY, "Morliny", 8);
+	//dodajSpolke(Spolka::Typ::PRZEMYSL_SPOZYWCZY, "Żywiec", 440);
+	//dodajSpolke(Spolka::Typ::PRZEMYSL_SPOZYWCZY, "Kruszwica", 56);
+	//dodajSpolke(Spolka::Typ::PRZEMYSL_SPOZYWCZY, "Carrefour", 4);
+	//
+	//dodajSpolke(Spolka::Typ::PRZEMYSL_ENERGETYCZNY, "Coalenergy", 2);
+	//dodajSpolke(Spolka::Typ::PRZEMYSL_ENERGETYCZNY, "PGNiG", 5);
+	//dodajSpolke(Spolka::Typ::PRZEMYSL_ENERGETYCZNY, "PKN Orlen", 74);
+	//dodajSpolke(Spolka::Typ::PRZEMYSL_ENERGETYCZNY, "PGE", 14);
+	//dodajSpolke(Spolka::Typ::PRZEMYSL_ENERGETYCZNY, "Energa", 15);
+	//
+	//dodajSpolke(Spolka::Typ::BANKOWOSC, "Mbank", 340);
+	//dodajSpolke(Spolka::Typ::BANKOWOSC, "Alior bank", 70);
+	//dodajSpolke(Spolka::Typ::BANKOWOSC, "Millenium", 5);
+	//dodajSpolke(Spolka::Typ::BANKOWOSC, "ING", 120);
+	//dodajSpolke(Spolka::Typ::BANKOWOSC, "PKO bp", 27);
+	//
+	//dodajSpolke(Spolka::Typ::UBEZPIECZENIA, "PZU", 35);
+	//dodajSpolke(Spolka::Typ::UBEZPIECZENIA, "Metlive", 15);
+	//dodajSpolke(Spolka::Typ::UBEZPIECZENIA, "TALANX", 100);
+	//dodajSpolke(Spolka::Typ::UBEZPIECZENIA, "Warta", 215);
+	//dodajSpolke(Spolka::Typ::UBEZPIECZENIA, "Aviva", 415);
+	//
+	//dodajWalute("Złoty", 1.00f);
+	//dodajWalute("Euro", 4.20f);
+	//dodajWalute("Dolar", 3.50f);
+	//dodajWalute("Funt", 5.40f);
 }
 
 void Gra::zapisz(const char* sciezka)
 {
-	zapiszDane(sciezka, TypZnacznika::ZAPISU_ROZGRYWKI, this);
+	zapiszDane(sciezka, TypDokumentu::ZAPISU_ROZGRYWKI, this);
 }
 
 void Gra::wczytaj(const char* sciezka)
@@ -64,6 +64,7 @@ void Gra::wczytaj(const char* sciezka)
 	usunWszystkieDane();
 	
 	// wczytywanie nowych danych
+	wczytajDane(sciezka, this);
 }
 
 int Gra::dodajGracza(const char* nazwa_gracza)
@@ -101,6 +102,23 @@ void Gra::info()
 	{
 		printf("%d. %s\n", i+1, _gracze[i].wezNazweGracza().c_str());
 	}
+	
+	printf("Spółki:\n");
+	for( int i = 0; i < _spolki.size(); ++i )
+	{
+		printf("%d. %s\n", i+1, _spolki[i].nazwa);
+	}
+	
+	printf("Waluty:\n");
+	for( int i = 0; i < _waluty.size(); ++i )
+	{
+		printf("%d. %s\n", i+1, _waluty[i].nazwa);
+	}
+}
+
+void Gra::dodajSpolke(const Spolka& nowa_spolka)
+{
+	_spolki.push_back(nowa_spolka);
 }
 
 void Gra::dodajSpolke(Spolka::Typ typ_spolki, const char* nazwa, unsigned int wartosc_akcji)
@@ -123,6 +141,11 @@ void Gra::usunSpolke(const char* nazwa)
 			_spolki.erase(_spolki.begin()+i);
 		}
 	}
+}
+
+void Gra::dodajWalute(Waluta nowa_waluta)
+{
+	_waluty.push_back(nowa_waluta);
 }
 
 void Gra::dodajWalute(const char* nazwa, float wartosc)

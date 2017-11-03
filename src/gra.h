@@ -43,12 +43,15 @@ public:
 	inline int iloscSpolek() { return _spolki.size(); }
 	inline int iloscWalut() { return _waluty.size(); }
 	
-	friend void zapiszDane(const char* sciezka, TypZnacznika typ, void* dane);
+	friend void zapiszDane(const char* sciezka, TypDokumentu typ, void* dane);
+	friend void wczytajDane(const char* sciezka, void* obiekt_docelowy);
 	
 private:
+	void dodajSpolke(const Spolka& nowa_spolka);
 	void dodajSpolke(Spolka::Typ, const char* nazwa, unsigned int wartosc_akcji);
 	void usunSpolke(const char* nazwa);
 	
+	void dodajWalute(Waluta nowa_waluta);
 	void dodajWalute(const char* nazwa, float wartosc);
 	void usunWalute(const char* nazwa);
 	

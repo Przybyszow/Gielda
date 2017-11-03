@@ -1,0 +1,31 @@
+{1;4}
+{a;ff;Dom Development;32;3e8}
+{a;ff;Budimex;c3;3e8}
+{a;ff;Mostostal;e;3e8}
+{a;ff;Energomontaż;e;3e8}
+{a;ff;J.W. Construction;4;3e8}
+{a;fe;Soklłów;5;3e8}
+{a;fe;Morliny;8;3e8}
+{a;fe;Żywiec;1b8;3e8}
+{a;fe;Kruszwica;38;3e8}
+{a;fe;Carrefour;4;3e8}
+{a;fd;Coalenergy;2;3e8}
+{a;fd;PGNiG;5;3e8}
+{a;fd;PKN Orlen;4a;3e8}
+{a;fd;PGE;e;3e8}
+{a;fd;Energa;f;3e8}
+{a;fc;Mbank;154;3e8}
+{a;fc;Alior bank;46;3e8}
+{a;fc;Millenium;5;3e8}
+{a;fc;ING;78;3e8}
+{a;fc;PKO bp;1b;3e8}
+{a;fb;PZU;23;3e8}
+{a;fb;Metlive;f;3e8}
+{a;fb;TALANX;64;3e8}
+{a;fb;Warta;d7;3e8}
+{a;fb;Aviva;19f;3e8}
+{b;Złoty;1.00}
+{b;Euro;4.20}
+{b;Dolar;3.50}
+{b;Funt;5.40}
+{2}

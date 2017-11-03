@@ -13,8 +13,8 @@
  * 4.	Znacznik ma nieokreśloną liczbę elementów.
  * 5.	Każdy dokument rozpoczyna się znacznikiem z pierwszym argumentem
  * 		równym 1 i drugim argumentem określającym rodzaj dokumentu.
- * 		Każdy dokument kończy się znacznikiem z pierwszym argumentem
- * 		równym 2.
+ * 		Każdy dokument kończy się znacznikiem z jednym argumentem, który
+ * 		jest równy 2.
  * */
 
 
@@ -23,23 +23,35 @@
 
 #include "obiekty_transakcji.h"
 
+#include <vector>
 #include <string>
 
+enum class TypDokumentu {
+	NIEZIDENTYFIKOWANY  = 0,
+	NIEZDEFINIOWANY     = 3,
+	ZAPISU_ROZGRYWKI    = 4,
+	KONFIGURACYJNY      = 5
+};
+
 enum class TypZnacznika {
-	NIEZDEFINIOWANY 	= 0,
-	STARTUJACY 			= 1,
-	KONCZACY 			= 2,
+	NIEZIDENTYFIKOWANY  = 0,
+	STARTUJACY          = 1,
+	KONCZACY            = 2,
+	NIEZDEFINIOWANY     = 3,
 	
-	ZAPISU_ROZGRYWKI 	= 3,
-	KONFIGURACYJNY 		= 4,
-	
-	SPOLKA				= 10,
-	WALUTA				= 11
+	SPOLKA              = 10,
+	WALUTA              = 11
 };
 
 std::string utworzZnacznik(TypZnacznika typ, void* dane);
 
-void zapiszDane(const char* sciezka, TypZnacznika typ, void* dane);
+void zapiszDane(const char* sciezka, TypDokumentu typ, void* dane);
+
+void rozdzielArgZnacznika(const char* tresc, std::vector<std::string>& docelowa_lista);
+
+TypZnacznika odczytajTypZnacznika(const std::vector<std::string>& argumenty);
+
+void* odczytajZnacznik(const std::vector<std::string>& argumenty, TypZnacznika typ, void* obiekt_docelowy);
 
 void wczytajDane(const char* sciezka, void* obiekt_docelowy);
 
