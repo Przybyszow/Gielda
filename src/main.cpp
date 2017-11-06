@@ -12,10 +12,8 @@ int main(int argc, const char* argv[])
 	
 	gra->start();
 	
-	gra->dodajGracza("Kacper");
-	
-	//gra->zapisz("dane/zapis_v2.txt");
-	gra->wczytaj("dane/zapis_v2.txt");
+	gra->wczytaj("dane/startowe_dane.txt");
+	gra->zapisz("dane/startowe_dane.txt");
 	
 	gra->info();
 	

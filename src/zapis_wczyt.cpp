@@ -37,7 +37,7 @@ std::string utworzZnacznik(TypZnacznika typ, void* dane)
 			Spolka* spl = (Spolka*)dane;
 			sprintf(buffer, ";%x;%s;%x;%x",
 				spl->typ_spolki,
-				spl->nazwa,
+				spl->nazwa.c_str(),
 				spl->wartosc_akcji,
 				spl->dostepne_akcje );
 			
@@ -48,7 +48,7 @@ std::string utworzZnacznik(TypZnacznika typ, void* dane)
 		case TypZnacznika::WALUTA:
 		{
 			Waluta* waluta = (Waluta*)dane;
-			sprintf(buffer, ";%s;%.2f", waluta->nazwa, waluta->wartosc);
+			sprintf(buffer, ";%s;%.2f", waluta->nazwa.c_str(), waluta->wartosc);
 			
 			znacznik.append(buffer);
 		} break;
@@ -111,29 +111,29 @@ void rozdzielArgZnacznika(const char* tresc, std::vector<std::string>& docelowa_
 	}
 	
 	unsigned int dlugosc_lancucha = strlen(tresc);
-	int liczba_arg = 0;
 	
-	std::string tymczasowy;
+	std::string tymczasowy = "";
 	bool koniec_zn = false;
 	
-	for( int i = 0; i < dlugosc_lancucha || !koniec_zn; ++i )
+	for( int i = 0; i <= dlugosc_lancucha || !koniec_zn; ++i )
 	{
 		switch(tresc[i])
 		{
 			case ';':
-				++liczba_arg;
 				docelowa_lista.push_back(tymczasowy);
+				tymczasowy.clear();
 				break;
 			case '{':
-				liczba_arg = 1;
-				docelowa_lista.push_back(tymczasowy);
+				// ...
 				break;
 			case '}':
 				koniec_zn = true;
+				docelowa_lista.push_back(tymczasowy);
+				tymczasowy.clear();
 				break;
 			default:
-				docelowa_lista[liczba_arg-1] += tresc[i];
-				continue;
+				tymczasowy += tresc[i];
+				break;
 		}
 	}
 }
@@ -142,7 +142,6 @@ TypZnacznika odczytajTypZnacznika(const std::vector<std::string>& argumenty)
 {
 	int ityp = 0;
 	sscanf(argumenty[0].c_str(), "%x", &ityp);
-	fprintf(stderr, "%s\n", argumenty[0].c_str());
 	return ((TypZnacznika)ityp);
 }
 
@@ -178,7 +177,7 @@ void* odczytajZnacznik(const std::vector<std::string>& argumenty, TypZnacznika t
 				nowa_spolka->typ_spolki = (Spolka::Typ)iliczba;
 				
 				// nazwa
-				sscanf(argumenty[2].c_str(), "%s", nowa_spolka->nazwa);
+				nowa_spolka->nazwa = argumenty[2];
 				
 				// wartość akcji
 				sscanf(argumenty[3].c_str(), "%x", &(nowa_spolka->wartosc_akcji));
@@ -194,7 +193,7 @@ void* odczytajZnacznik(const std::vector<std::string>& argumenty, TypZnacznika t
 				Waluta* nowa_waluta = (Waluta*)(obiekt_docelowy);
 				
 				// nazwa
-				sscanf(argumenty[1].c_str(), "%s", nowa_waluta->nazwa);
+				nowa_waluta->nazwa = argumenty[1].c_str();
 				
 				// wartość
 				sscanf(argumenty[2].c_str(), "%f", &(nowa_waluta->wartosc));
@@ -211,7 +210,11 @@ void wczytajDane(const char* sciezka, void* obiekt_docelowy)
 	
 	FILE* plik = nullptr;
 	plik = fopen(sciezka, "r");
-	if( plik )
+	if( !plik )
+	{
+		fprintf(stderr, "Nie udalo sie wczytac pliku (%s)!", sciezka);
+	}
+	else
 	{
 		TypZnacznika typ_znacznika = TypZnacznika::NIEZIDENTYFIKOWANY;
 		std::string tresc_znacznika = "";
@@ -223,12 +226,13 @@ void wczytajDane(const char* sciezka, void* obiekt_docelowy)
 		{
 			if( znak == '{' )
 				znaleziono_znacznik = true;
-			else if( znak == '}' )
+			else if( znak == '}' && znaleziono_znacznik )
 			{
 				znaleziono_znacznik = false;
 				tresc_znacznika += znak;
 				
 				rozdzielArgZnacznika(tresc_znacznika.c_str(), argumenty);
+				tresc_znacznika.clear();
 				typ_znacznika = odczytajTypZnacznika(argumenty);
 				
 				if( typ_znacznika == TypZnacznika::STARTUJACY )
@@ -240,11 +244,10 @@ void wczytajDane(const char* sciezka, void* obiekt_docelowy)
 				{
 					case TypDokumentu::KONFIGURACYJNY:
 					{
-						fprintf(stderr, "KONFIGURACYJNY");
+						//fprintf(stderr, "KONFIGURACYJNY");
 					} break;
 					case TypDokumentu::ZAPISU_ROZGRYWKI:
 					{
-						fprintf(stderr, "ZAPISU_ROZGRYWKI");
 						Gra* gra = (Gra*)obiekt_docelowy;
 						Spolka wczytywana_spolka;
 						Waluta wczytywana_waluta;
@@ -252,24 +255,19 @@ void wczytajDane(const char* sciezka, void* obiekt_docelowy)
 						switch(typ_znacznika)
 						{
 							case TypZnacznika::KONCZACY:
-								fprintf(stderr, ":KONCZACY\n");
 								break;
 							
 							case TypZnacznika::SPOLKA:
 							{
-								fprintf(stderr, ":SPOLKA\n");
 								odczytajZnacznik(argumenty, typ_znacznika, &wczytywana_spolka);
 								gra->dodajSpolke(wczytywana_spolka);
-								gra->info();
 							} break;
 							case TypZnacznika::WALUTA:
 							{
-								fprintf(stderr, ":WALUTA\n");
 								odczytajZnacznik(argumenty, typ_znacznika, &wczytywana_waluta);
 								gra->dodajWalute(wczytywana_waluta);
 							} break;
 							default:
-								fprintf(stderr, ":OH_DAMN\n");
 								break;
 						}
 					} break;

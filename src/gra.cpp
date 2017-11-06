@@ -1,7 +1,6 @@
 #include "gra.h"
 
 #include <iostream>
-#include <iomanip>
 #include <fstream>
 #include <string.h>
 #include <string>
@@ -17,40 +16,7 @@ void Gra::start()
 {
 	_tura = 0;
 	
-	//dodajSpolke(Spolka::Typ::PRZEMYSL_BUDOWLANY, "Dom Development", 50);
-	//dodajSpolke(Spolka::Typ::PRZEMYSL_BUDOWLANY, "Budimex", 195);
-	//dodajSpolke(Spolka::Typ::PRZEMYSL_BUDOWLANY, "Mostostal", 14);
-	//dodajSpolke(Spolka::Typ::PRZEMYSL_BUDOWLANY, "Energomontaż", 14);
-	//dodajSpolke(Spolka::Typ::PRZEMYSL_BUDOWLANY, "J.W. Construction", 4);
-	//
-	//dodajSpolke(Spolka::Typ::PRZEMYSL_SPOZYWCZY, "Soklłów", 5);
-	//dodajSpolke(Spolka::Typ::PRZEMYSL_SPOZYWCZY, "Morliny", 8);
-	//dodajSpolke(Spolka::Typ::PRZEMYSL_SPOZYWCZY, "Żywiec", 440);
-	//dodajSpolke(Spolka::Typ::PRZEMYSL_SPOZYWCZY, "Kruszwica", 56);
-	//dodajSpolke(Spolka::Typ::PRZEMYSL_SPOZYWCZY, "Carrefour", 4);
-	//
-	//dodajSpolke(Spolka::Typ::PRZEMYSL_ENERGETYCZNY, "Coalenergy", 2);
-	//dodajSpolke(Spolka::Typ::PRZEMYSL_ENERGETYCZNY, "PGNiG", 5);
-	//dodajSpolke(Spolka::Typ::PRZEMYSL_ENERGETYCZNY, "PKN Orlen", 74);
-	//dodajSpolke(Spolka::Typ::PRZEMYSL_ENERGETYCZNY, "PGE", 14);
-	//dodajSpolke(Spolka::Typ::PRZEMYSL_ENERGETYCZNY, "Energa", 15);
-	//
-	//dodajSpolke(Spolka::Typ::BANKOWOSC, "Mbank", 340);
-	//dodajSpolke(Spolka::Typ::BANKOWOSC, "Alior bank", 70);
-	//dodajSpolke(Spolka::Typ::BANKOWOSC, "Millenium", 5);
-	//dodajSpolke(Spolka::Typ::BANKOWOSC, "ING", 120);
-	//dodajSpolke(Spolka::Typ::BANKOWOSC, "PKO bp", 27);
-	//
-	//dodajSpolke(Spolka::Typ::UBEZPIECZENIA, "PZU", 35);
-	//dodajSpolke(Spolka::Typ::UBEZPIECZENIA, "Metlive", 15);
-	//dodajSpolke(Spolka::Typ::UBEZPIECZENIA, "TALANX", 100);
-	//dodajSpolke(Spolka::Typ::UBEZPIECZENIA, "Warta", 215);
-	//dodajSpolke(Spolka::Typ::UBEZPIECZENIA, "Aviva", 415);
-	//
-	//dodajWalute("Złoty", 1.00f);
-	//dodajWalute("Euro", 4.20f);
-	//dodajWalute("Dolar", 3.50f);
-	//dodajWalute("Funt", 5.40f);
+	
 }
 
 void Gra::zapisz(const char* sciezka)
@@ -97,22 +63,22 @@ void Gra::usunGracza(const char* nazwa_gracza)
 
 void Gra::info()
 {
-	printf("Gracze:\n");
+	printf("-> Gracze(%d):\n", _gracze.size());
 	for( int i = 0; i < _gracze.size(); ++i )
 	{
 		printf("%d. %s\n", i+1, _gracze[i].wezNazweGracza().c_str());
 	}
 	
-	printf("Spółki:\n");
+	printf("-> Spolki(%d):\n", _spolki.size());
 	for( int i = 0; i < _spolki.size(); ++i )
 	{
-		printf("%d. %s\n", i+1, _spolki[i].nazwa);
+		printf("%3d. %-32s | %4d | %4d\n", i+1, _spolki[i].nazwa.c_str(), _spolki[i].wartosc_akcji, _spolki[i].dostepne_akcje);
 	}
 	
-	printf("Waluty:\n");
+	printf("-> Waluty(%d):\n", _waluty.size());
 	for( int i = 0; i < _waluty.size(); ++i )
 	{
-		printf("%d. %s\n", i+1, _waluty[i].nazwa);
+		printf("%3d. %10s | %4.2f\n", i+1, _waluty[i].nazwa.c_str(), _waluty[i].wartosc);
 	}
 }
 
@@ -136,7 +102,7 @@ void Gra::usunSpolke(const char* nazwa)
 {
 	for( int i = 0; i < _spolki.size(); ++i )
 	{
-		if( !strcmp( _spolki[i].nazwa, nazwa ) )
+		if( !strcmp( _spolki[i].nazwa.c_str(), nazwa ) )
 		{
 			_spolki.erase(_spolki.begin()+i);
 		}
@@ -161,7 +127,7 @@ void Gra::usunWalute(const char* nazwa)
 {
 	for( int i = 0; i < _waluty.size(); ++i )
 	{
-		if( !strcmp( _waluty[i].nazwa, nazwa ) )
+		if( !strcmp( _waluty[i].nazwa.c_str(), nazwa ) )
 		{
 			_waluty.erase(_waluty.begin()+i);
 		}
