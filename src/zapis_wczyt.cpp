@@ -52,6 +52,13 @@ std::string utworzZnacznik(TypZnacznika typ, void* dane)
 			
 			znacznik.append(buffer);
 		} break;
+		case TypZnacznika::STAN_GRY:
+		{
+			Gra* gra = (Gra*)dane;
+			sprintf(buffer, ";%x", gra->_tura);
+			
+			znacznik.append(buffer);
+		} break;
 	}
 	
 	znacznik.append("}");
@@ -77,6 +84,8 @@ void zapiszDane(const char* sciezka, TypDokumentu typ, void* dane)
 		case TypDokumentu::ZAPISU_ROZGRYWKI:
 		{
 			Gra* gra = (Gra*)dane;
+			
+			plik << utworzZnacznik(TypZnacznika::STAN_GRY, gra) << std::endl;
 			
 			for( unsigned int i = 0; i < gra->_spolki.size(); ++i )
 			{
@@ -199,6 +208,13 @@ void* odczytajZnacznik(const std::vector<std::string>& argumenty, TypZnacznika t
 				sscanf(argumenty[2].c_str(), "%f", &(nowa_waluta->wartosc));
 			}
 		} break;
+		case TypZnacznika::STAN_GRY:
+		{
+			Gra* gra = (Gra*)obiekt_docelowy;
+			
+			// tura
+			sscanf(argumenty[1].c_str(), "%x", &(gra->_tura));
+		} break;
 	}
 	
 	return obiekt_docelowy;
@@ -244,13 +260,11 @@ void wczytajDane(const char* sciezka, void* obiekt_docelowy)
 				{
 					case TypDokumentu::KONFIGURACYJNY:
 					{
-						//fprintf(stderr, "KONFIGURACYJNY");
+						
 					} break;
 					case TypDokumentu::ZAPISU_ROZGRYWKI:
 					{
 						Gra* gra = (Gra*)obiekt_docelowy;
-						Spolka wczytywana_spolka;
-						Waluta wczytywana_waluta;
 						
 						switch(typ_znacznika)
 						{
@@ -259,13 +273,19 @@ void wczytajDane(const char* sciezka, void* obiekt_docelowy)
 							
 							case TypZnacznika::SPOLKA:
 							{
+								Spolka wczytywana_spolka;
 								odczytajZnacznik(argumenty, typ_znacznika, &wczytywana_spolka);
 								gra->dodajSpolke(wczytywana_spolka);
 							} break;
 							case TypZnacznika::WALUTA:
 							{
+								Waluta wczytywana_waluta;
 								odczytajZnacznik(argumenty, typ_znacznika, &wczytywana_waluta);
 								gra->dodajWalute(wczytywana_waluta);
+							} break;
+							case TypZnacznika::STAN_GRY:
+							{
+								odczytajZnacznik(argumenty, typ_znacznika, gra);
 							} break;
 							default:
 								break;

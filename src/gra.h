@@ -43,8 +43,10 @@ public:
 	inline int iloscSpolek() { return _spolki.size(); }
 	inline int iloscWalut() { return _waluty.size(); }
 	
-	friend void zapiszDane(const char* sciezka, TypDokumentu typ, void* dane);
-	friend void wczytajDane(const char* sciezka, void* obiekt_docelowy);
+	friend void zapiszDane(const char*, TypDokumentu, void*);
+	friend std::string utworzZnacznik(TypZnacznika, void*);
+	friend void wczytajDane(const char*, void*);
+	friend void* odczytajZnacznik(const std::vector<std::string>&, TypZnacznika, void*);
 	
 private:
 	void dodajSpolke(const Spolka& nowa_spolka);

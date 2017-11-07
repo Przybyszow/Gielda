@@ -6,6 +6,7 @@
 #include <string>
 
 Gra::Gra()
+	: _tura(0)
 {
 }
 Gra::~Gra()

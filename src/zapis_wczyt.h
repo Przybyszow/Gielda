@@ -40,7 +40,8 @@ enum class TypZnacznika {
 	NIEZDEFINIOWANY     = 3,
 	
 	SPOLKA              = 10,
-	WALUTA              = 11
+	WALUTA              = 11,
+	STAN_GRY            = 12
 };
 
 std::string utworzZnacznik(TypZnacznika typ, void* dane);
