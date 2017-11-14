@@ -16,8 +16,7 @@ Gra::~Gra()
 void Gra::start()
 {
 	_tura = 0;
-	
-	
+	wczytaj("dane/startowe_dane.txt");
 }
 
 void Gra::zapisz(const char* sciezka)

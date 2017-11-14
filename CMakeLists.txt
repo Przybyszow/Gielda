@@ -15,3 +15,8 @@ file(GLOB SOURCES
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 set(EXECUTABLE_OUTPUT_PATH ../)
+
+set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules/")
+find_package(SFML REQUIRED audio network graphics window system)
+
+target_link_libraries(${PROJECT_NAME} ${SFML_LIBRARIES})
