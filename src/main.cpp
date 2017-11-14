@@ -7,36 +7,30 @@
 
 int main(int argc, const char* argv[])
 {
-	App::inicjalizacja();
+	App::inicjalizacja("Gielda", 640, 400);
 	
 	Gra* gra = &App::_gra;
 	
 	gra->start();
 	
 	gra->wczytaj("dane/startowe_dane.txt");
-	gra->zapisz("dane/startowe_dane.txt");
+	//gra->zapisz("dane/startowe_dane.txt");
 	
-	gra->info();
+	//gra->info();
 	
 	App::czyszczenie();
 	
 	
-	sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
 	sf::CircleShape shape(100.0f);
 	shape.setFillColor(sf::Color::Green);
 	
-	while(window.isOpen())
+	while(App::_glowneOkno.isOpen())
 	{
-		sf::Event event;
-		while(window.pollEvent(event))
-		{
-			if(event.type == sf::Event::Closed)
-				window.close();
-		}
+		App::sprawdzWydarzenia();
 		
-		window.clear();
-		window.draw(shape);
-		window.display();
+		App::_glowneOkno.clear();
+		App::_glowneOkno.draw(shape);
+		App::_glowneOkno.display();
 	}
 	
 	return 0;
